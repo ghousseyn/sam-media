@@ -1,0 +1,109 @@
+
+foreach character on the keyboard we create a map (dataSource.php)
+(@TODO This should be dumped in a file to avoid regenrating it everytime)
+
+array (
+  2000 => 97 			//key => asci code
+  'row' => 2 			//row
+  'col' => 1 			// column
+  'onspace' => false	// Is it on the space bar
+  'space' => false      // Is it the space key
+  'bs' => false         // Is it the backspace  
+  'location' => 'left'  // Where is it located
+  'u' => 1000           // character on top
+  'd' => 3000        	// character under
+  'l' => 2025          	// character to the left
+  'r' => 2001			// character to the right
+  )
+  
+ ==================== Algorithm =================
+ :			Is for definition or assignement it basically means 'is'  
+ elmOne		Refer to the the sequence being processed
+ elmTwo 
+ 
+ =======================Main========================
+proc:vertical
+ 
+  neighbor: elmOne[vdir] 						// get the next character in our direction (vertical)
+  
+  if(current == elmTwo || current:row == rowTwo)  	// check if we found the destination (character or its row)  	
+   
+	path[vdir]: steps								// if found get the steps to it and return
+    return 	
+  else
+    steps++										   	// else increment and go for the next character
+    :vertical(neighbor)
+	
+	
+proc:horizontal											// same steps as above
+
+  neighbor: elmOne[hdir] 							// go horizontally this time
+  
+  if(current == elmTwo || current:col == colTwo) 	
+   
+	path[hdir]: steps
+    return 	
+  else
+    steps++
+    :horizontal(neighbor)
+	
+
+================ Helper Proc ====================================
+
+proc:vdir                        // gets vertical direction
+   signed vdistance: rowOne - rowTwo       // direction based on the sign and steps combined 
+   dir: up                                 // default to up
+
+   if(vdistance >= 2 || vdistance == -1)   //decide if we should go down instead
+     dir:down                                 //-1 means that destination is on the very
+                                              // next row
+                 
+   
+   return dir		                        // return the value
+   
+   
+_______________________________________________________________________________________________
+
+ proc:hdir                        							// gets horizontal direction 
+   signed hdistance: colOne - colTwo      						 // direction based on the sign and steps combined 
+   dir: left                             						  // default to left
+	
+   if(hdistance >= 14 || (hdistance <0 && hdistance  >= -14))  	 //decide if we should go right instead
+     dir:right                                                 
+  
+   
+   return dir						                        // return the value
+   
+_______________________________________________________________________________________________
+ 
+ proc:directions             // get directions (will we need to move up and 
+                             //down left and right or not   
+
+   vertical: false               // defaults 
+   horizontal: false							 
+				 
+   if( rowOne <> rowTwo )          //if rows are different there is a vertical distance
+     vertical: true
+   if( colOne <> colTwo )          //different columns means there is a horizontal distance 
+     horizontal: true
+	 
+   return [horizontal,vertical]  // return our results
+   
+_________________________________________________________________________________________________
+
+proc:spaceInBetween
+
+  if((elmOne || elmTwo):space: true)
+    return false
+	
+  elmOne[location] <> elmTwo[location]
+  
+    if((elmOne || elmTwo):onspace: true )
+	  if( direction: right && elmTwo:row: 1 )
+	    return false  
+      return true
+	  
+  return false
+  
+
+   

@@ -4,7 +4,7 @@ namespace keyOP;
 require_once 'keyOP.php';
 
 /**
- *
+ * Formats and prints the steps from a character to another.
  * @author Hussein Guettaf <ghoucine@gmail.com>
  */
 

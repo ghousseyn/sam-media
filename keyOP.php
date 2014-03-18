@@ -2,7 +2,8 @@
 namespace keyOP;
 
 /**
- *
+ * Calculates the best path between two characters. It returns the best path after scoring possible paths and evaluating them.
+ * Extend it to format, print, or serve as json
  * @author Hussein Guettaf <ghoucine@gmail.com>
  */
 
@@ -31,7 +32,7 @@ class keyOP
    */
 
   /**
-   * The character squence being processed two characters at atime)
+   * The character squence being processed (two characters at atime)
    * @var string
    */
   protected $elmOne = null;
@@ -107,7 +108,7 @@ class keyOP
    * Tries to collect all paths (use it to see all paths if you want to - left public for that matter)
    * @param string $char1
    * @param string $char2
-   * @todo make it protected and remove parameters
+   * @todo make it protected and remove arguments
    */
   public function getAllPaths($char1, $char2)
   {
@@ -344,6 +345,7 @@ class keyOP
     if($this->verbose){
       echo 'V:Col('.$from['col'].') From ', key($from), ' AT row ', $from['row'], ' To ', key($to), ' AT row ', $to['row'], self::EOL ;
     }
+
     $neighbor = $this->getElement($from[$this->vdir]);
     $this->path['v'][$this->vdir] = ++$this->vsteps;
 

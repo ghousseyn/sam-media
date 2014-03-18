@@ -2,6 +2,7 @@
 namespace keyOP;
 
 /**
+ * Generates parts of the layout and compiles a dictionary of maps for the keyboard keys.
  *
  * @author Hussein Guettaf <ghoucine@gmail.com>
  */
